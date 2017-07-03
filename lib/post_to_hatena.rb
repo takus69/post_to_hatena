@@ -55,6 +55,7 @@ module PostToHatena
   
   def self.post_tweets()
     tweets = EditTweets.fetch_last_month_tweets()
+    return false if tweets.empty?
     body = EditTweets.edit_tweets_for_hatena(tweets)
     day = Date.today.prev_month
     PostToHatena.post_to_hatena("#{day.year}年#{day.month}月のつぶやき", body, "twitter")
